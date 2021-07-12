@@ -3,22 +3,6 @@
 #include <cstring>
 #include <fstream>
 using namespace std;
-
-
-
-/*struct Applicant
-{
-    int Id;
-    string username;
-    string firstName;
-    string lastName;
-    string address;
-    string education;
-    int yearOfExperience;
-};*/
-
-
-
 bool isLoggedIn()
 {
     string username, password, username1, password1;
@@ -47,8 +31,40 @@ bool isLoggedIn()
 
 
 
+bool isLoggedInAdmin()
+{
+    string username, password, username1, password1;
+    cout << "Enter your username" << endl;
+    cin >> username;
+    cout << "Enter your password" << endl;
+    cin >> password;
+    ifstream read(username + ".txt");
+
+
+
+    getline(read, username1);
+    getline(read, password1);
+
+
+
+
+    if (username1 == username && password1 == password)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+
+
+
+
 void addApplicant()
 {
+    system("cls");
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     string ID;
     cout << "Enter applicant's ID" << endl;
@@ -103,9 +119,12 @@ void adminChoice()
 
 
 
+
+
 int main()
 {
-    /*int choice;
+    int choice;
+    int adminStatus;
     cout << "Enter 1 if you want to register or 2 if you want to login" << endl;
     cin >> choice;
     if (choice == 1)
@@ -128,33 +147,48 @@ int main()
         file.open(username + ".txt");
         file << username << endl << password;
         file.close();
+        cout << "Registered successfully!";
+        return 0;
     }
     else if (choice == 2)
     {
-        bool status = isLoggedIn();
-
-
-
-        if (!status)
+        cout << "Enter 1 if you want to login as an user or 2 if you want to login as an admin" << endl;
+        cin >> adminStatus;
+        if (adminStatus == 1)
         {
-            cout << "Incorrect credentials!" << endl;
-            system("PAUSE");
-            return 0;
+            bool status = isLoggedIn();
+
+
+
+            if (!status)
+            {
+                cout << "Incorrect credentials!" << endl;
+                system("PAUSE");
+                return 0;
+            }
+            else
+            {
+                cout << "You're logged in!" << endl;
+                system("PAUSE");
+                system("cls");
+            }
         }
         else
         {
-            cout << "You're logged in!" << endl;
-            system("PAUSE");
-            return 1;
+            bool adminStatus = isLoggedInAdmin();
+            if (!adminStatus)
+            {
+                cout << "Incorrect credentials!" << endl;
+                system("PAUSE");
+                return 0;
+            }
+            else
+            {
+                cout << "You're logged in!" << endl;
+                system("PAUSE");
+                system("cls");
+                adminChoice();
+            }
         }
-    }*/
-    /*int adminMenuChoice;
-    cout << "Enter 1 if you want to add an applicant, 2 if you want to edit applicant's information or 3 if you want to delete one" << endl;
-    cin >> adminMenuChoice;
-    system("PAUSE");
-    if (adminMenuChoice == 1)
-    {
-
-    }*/
-    adminChoice();
+    }
 }
