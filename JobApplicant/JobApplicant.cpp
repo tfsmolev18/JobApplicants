@@ -3,6 +3,17 @@
 #include <fstream>
 using namespace std;
 
+struct Applicant
+{
+	int Id;
+	string username;
+	string firstName;
+	string lastName;
+	string address;
+	string education;
+	int yearOfExperience;
+};
+
 bool isLoggedIn()
 {
 	string username, password, username1, password1;
@@ -22,6 +33,25 @@ bool isLoggedIn()
 	else
 	{
 		return false;
+	}
+}
+
+int adminChoice()
+{
+	int choice;
+	cout << "Enter 1 if you want to add an applicant, 2 if you want to edit applicant's information or 3 if you want to delete one" << endl;
+	cin >> choice;
+	if (choice == 1)
+	{
+		
+	}
+	else if (choice == 2)
+	{
+		
+	}
+	else if (choice == 3)
+	{
+
 	}
 }
 
@@ -51,7 +81,7 @@ int main()
 
 		if (!status)
 		{
-			cout << "Incorrect creditals!" << endl;
+			cout << "Incorrect credentials!" << endl;
 			system("PAUSE");
 			return 0;
 		}
@@ -62,4 +92,5 @@ int main()
 			return 1;
 		}
 	}
+
 }
