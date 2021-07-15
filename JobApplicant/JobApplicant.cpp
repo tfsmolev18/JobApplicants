@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <string>
 #include <cstring>
 #include <fstream>
@@ -86,7 +86,7 @@ void addApplicant()
         cout << "Applicant was added successfully";
         file.open(fileName);
     }
-    file << "ID - " << ID << endl << "username - " << username << endl << "first name - " << firstName << endl << "last name - " << lastName << endl << "address - " << address << endl << "education level -" << education << endl << "years of experience - " << yearOfExperience;
+    file << ID << endl  << username << endl  << firstName << endl  << lastName << endl << address << endl << education << endl << yearOfExperience;
     file.close();
 }
 
@@ -94,15 +94,62 @@ void editApplicant()
 {
     string fileName;
     cout << "Enter the ID of the applicant you are looking for" << endl;
-    getline(cin, fileName);
+	cin.ignore();
     getline(cin, fileName);
     string textFile = fileName + ".txt";
     ifstream file(textFile);
-
     if (file.good()) 
     {
-        cout << "Youre now editing " << textFile << endl;
-        file.open(textFile);
+		string ID;
+		getline(file,ID);
+		cout << "Current ID - " << ID << endl;;
+		string username;
+		getline(file, username);
+		cout << "Old username - " << username << endl;
+		string newUsername;
+		cout << "Enter new username - ";
+		getline(cin, newUsername);
+		cout << endl;
+		string firstName;
+		getline(file, firstName);
+		cout << "Old first name - " << firstName << endl;
+		string newFirstName;
+		cout << "Enter new first name - ";
+		getline(cin, newFirstName);
+		cout << endl;
+		string lastName;
+		getline(file, lastName);
+		cout << "Old last name - " << lastName << endl;
+		string newLastName;
+		cout << "Enter new last name - ";
+		getline(cin, newLastName);
+		cout << endl;
+		string address;
+		getline(file, address);
+		cout << "Old address - " << address << endl;
+		string newAddress;
+		cout << "Enter new address - ";
+		getline(cin, newAddress);
+		cout << endl;
+		string education;
+		getline(file, education);
+		cout << "Old level of education - " << education << endl;
+		string newEducation;
+		cout << "Enter new level of education - ";
+		getline(cin, newEducation);
+		cout << endl;
+		string yearOfExperience;
+		getline(file, yearOfExperience);
+		cout << "Old years of experience - " << yearOfExperience << endl;
+		string newYearOfExperience;
+		cout << "Enter new years of experience - ";
+		getline(cin, newYearOfExperience);
+		cout << endl;
+		file.close();
+		ofstream fWrite(textFile);
+		//fWrite.open(textFile);
+		fWrite << ID << endl << newUsername << endl << newFirstName << endl << newLastName << endl << newAddress << endl << newEducation << endl << newYearOfExperience;
+		fWrite.close();
     }
     else 
     {
@@ -112,7 +159,26 @@ void editApplicant()
 
 void deleteApplicant()
 {
+	string fileName;
+	cout << "Enter the ID of the applicant you are looking for" << endl;
+	cin.ignore();
+	getline(cin, fileName);
+	string textFile = fileName + ".txt";
+	ifstream file(textFile);
 
+	if (file.good())
+	{
+		file.close();
+		char command[1000] = "del /f ";
+		strcat_s(command, textFile.c_str());
+		system(command);
+
+		cout << "You have deleted the applicant with ID: " << textFile << endl;
+	}
+	else
+	{
+		cout << "Looks like there is no applicant with such ID " << endl;
+	}
 }
 
 void adminChoice()
