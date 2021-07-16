@@ -4,7 +4,7 @@
 #include <fstream>
 using namespace std;
 
-bool isLoggedIn()
+bool isLoggedIn() // function for logging in as an user
 {
     string username, password, username1, password1;
     cout << "Enter your username" << endl;
@@ -26,7 +26,7 @@ bool isLoggedIn()
     }
 }
 
-bool isLoggedInAdmin()
+bool isLoggedInAdmin() // function for logging in as an admin
 {
     string username, password, username1, password1;
     cout << "Enter your username" << endl;
@@ -48,7 +48,7 @@ bool isLoggedInAdmin()
     }
 }
 
-void addApplicant()
+void addApplicant() // function to add job applicants
 {
     system("cls");
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -90,8 +90,9 @@ void addApplicant()
     file.close();
 }
 
-void editApplicant()
+void editApplicant() // function to edit the information of applicants
 {
+    system("cls");
     string fileName;
     cout << "Enter the ID of the applicant you are looking for" << endl;
 	cin.ignore();
@@ -149,6 +150,7 @@ void editApplicant()
 		ofstream fWrite(textFile);
 		//fWrite.open(textFile);
 		fWrite << ID << endl << newUsername << endl << newFirstName << endl << newLastName << endl << newAddress << endl << newEducation << endl << newYearOfExperience;
+        cout << "Applicants' information edited successfully" << endl;
 		fWrite.close();
     }
     else 
@@ -157,8 +159,9 @@ void editApplicant()
     }
 }
 
-void deleteApplicant()
+void deleteApplicant() // function to delete applicants' information
 {
+    system("cls");
 	string fileName;
 	cout << "Enter the ID of the applicant you are looking for" << endl;
 	cin.ignore();
@@ -181,10 +184,13 @@ void deleteApplicant()
 	}
 }
 
-void adminChoice()
+void adminChoice() // main menu
 {
     string choice;
-    cout << "Enter 1 if you want to add an applicant, 2 if you want to edit applicant's information or 3 if you want to delete one" << endl;
+    cout << "--- Main Menu ---" << endl;
+    cout << "Enter 1 if you want to add an applicant" << endl;
+    cout << "Enter 2 if you want to edit applicant's information" << endl;
+    cout << "Enter 3 if you want to delete applicant's information" << endl;
     cin >> choice;
     if (choice == "1")
     {
@@ -205,12 +211,13 @@ int main()
 {
     int choice;
     int adminStatus;
-    cout << "Enter 1 if you want to register or 2 if you want to login" << endl;
+    cout << "--- Main Menu ---" << endl;
+    cout << "Enter 1 if you want to register" << endl;
+    cout << "Enter 2 if you want to login" << endl;
     cin >> choice;
     if (choice == 1)
     {
         string username, password;
-
         cout << "Enter an username: ";
         cin >> username;
         cout << "Enter a password: ";
@@ -226,7 +233,10 @@ int main()
     }
     else if (choice == 2)
     {
-        cout << "Enter 1 if you want to login as an user or 2 if you want to login as an admin" << endl;
+        system("cls");
+        cout << "--- Main Menu ---" << endl;
+        cout << "Enter 1 if you want to login as an user" << endl;
+        cout << "Enter 2 if you want to login as an admin" << endl;
         cin >> adminStatus;
         if (adminStatus == 1)
         {
